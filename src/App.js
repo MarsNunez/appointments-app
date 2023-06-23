@@ -1,42 +1,42 @@
-import { useState } from 'react';
-import Form from './components/Form';
-import Appointment from './components/Appointment';
+import { useState } from "react";
+import Form from "./components/Form";
+import Appointment from "./components/Appointment";
 
 function App() {
-
   const [appointments, setAppointments] = useState([]);
 
-  const createAppointment = appointment => {
-    setAppointments([
-      ...appointments,
-      appointment
-    ])
-  }
+  const createAppointment = (appointment) => {
+    setAppointments([...appointments, appointment]);
+  };
 
-  const deleteAppointment = id => {
-    const newAppointments = appointments.filter( appointment => appointment.id !== id )
+  const deleteAppointment = (id) => {
+    const newAppointments = appointments.filter(
+      (appointment) => appointment.id !== id
+    );
     setAppointments(newAppointments);
-  }
+  };
 
   return (
     <>
-      <h1>Patients Manager</h1>
+      <h1>Registro de Cheques</h1>
       <div className="container">
         <div className="row">
           <div className="one-half column">
-            <Form 
-              createAppointment={createAppointment}
-            />
+            <Form createAppointment={createAppointment} />
           </div>
           <div className="one-half column">
-            { appointments.length <= 0 ? <h2>There's no Appointments</h2> : <h2>Manage your Appointments</h2>}
-            { appointments.map( appointment => (
-              <Appointment 
+            {appointments.length <= 0 ? (
+              <h2>No hay cheques aun</h2>
+            ) : (
+              <h2>Listado de cheques</h2>
+            )}
+            {appointments.map((appointment) => (
+              <Appointment
                 key={appointment.id}
                 appointment={appointment}
                 deleteAppointment={deleteAppointment}
               />
-            )) }
+            ))}
           </div>
         </div>
       </div>
@@ -45,5 +45,3 @@ function App() {
 }
 
 export default App;
-
-

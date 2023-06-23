@@ -1,35 +1,40 @@
-import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-const Form = ({createAppointment}) => {
-
+const Form = ({ createAppointment }) => {
   // Create Appointment State
   const [appointment, setAppointment] = useState({
-    pet: '',
-    owner: '',
-    date: '',
-    time: '',
-    symptoms: '',
-  })
+    pet: "",
+    owner: "",
+    date: "",
+    time: "",
+    symptoms: "",
+  });
 
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setAppointment({
       ...appointment,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Validate
-    if( pet.trim() === '' || owner.trim() === '' || date.trim() === '' || time.trim() === '' || owner.trim() === '' ) {
-      setError(true)
+    if (
+      pet.trim() === "" ||
+      owner.trim() === "" ||
+      date.trim() === "" ||
+      time.trim() === "" ||
+      owner.trim() === ""
+    ) {
+      setError(true);
       return;
     }
-    setError(false)
+    setError(false);
 
     // ID
     appointment.id = uuidv4();
@@ -39,81 +44,81 @@ const Form = ({createAppointment}) => {
 
     // Reset Form
     setAppointment({
-      pet: '',
-      owner: '',
-      date: '',
-      time: '',
-      symptoms: '',
-    })
-
-  }
+      pet: "",
+      owner: "",
+      date: "",
+      time: "",
+      symptoms: "",
+    });
+  };
 
   const { pet, owner, date, time, symptoms } = appointment;
 
   return (
     <>
-      <h2>Create Appointment</h2>
+      <h2>Crear cheque</h2>
 
-      { error ? <p className='alerta-error'>All blanks are required</p> : null }
+      {error ? (
+        <p className="alerta-error">Todos los campos son requeridos</p>
+      ) : null}
 
-      <form
-        onSubmit={handleSubmit}
-      >
-        <label>Pet Name</label>
-        <input 
+      <form onSubmit={handleSubmit}>
+        <label>Banco</label>
+        <input
           type="text"
-          placeholder='Pet Name'
-          className='u-full-width'
-          name='pet'
+          placeholder="Banco"
+          className="u-full-width"
+          name="pet"
           onChange={handleChange}
           value={pet}
         />
 
-        <label>Owner Name</label>
-        <input 
+        <label>DNI Receptor</label>
+        <input
           type="text"
-          placeholder='Owner Name'
-          className='u-full-width'
-          name='owner'
+          placeholder="DNI Receptor"
+          className="u-full-width"
+          name="owner"
           onChange={handleChange}
           value={owner}
         />
 
-        <label>Date</label>
-        <input 
+        <label>Fecha</label>
+        <input
           type="date"
-          className='u-full-width'
-          name='date'
+          className="u-full-width"
+          name="date"
           onChange={handleChange}
           value={date}
         />
-        
-        <label>Time</label>
-        <input 
+
+        <label>Hora</label>
+        <input
           type="time"
-          className='u-full-width'
-          name='time'
+          className="u-full-width"
+          name="time"
           onChange={handleChange}
           value={time}
         />
 
-        <label>Symptoms</label>
+        <label>DNI Emisor</label>
         <textarea
-          className='u-full-width'
-          name='symptoms'
+          className="u-full-width"
+          name="symptoms"
           onChange={handleChange}
           value={symptoms}
         ></textarea>
 
         <button
-          type='submit'
-          className='u-full-width button-primary'
+          type="submit"
+          className="u-full-width button-primary"
           onChange={handleChange}
-        >Add Appointment</button>
-
+        >
+          Añadir Cheque
+        </button>
       </form>
     </>
-  )
-}
+  );
+};
 
 export default Form;
